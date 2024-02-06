@@ -1,6 +1,9 @@
 ﻿namespace incodityReservation.Domain;
 
-public class Class1
+public interface IEntity
 {
 
 }
+
+
+
