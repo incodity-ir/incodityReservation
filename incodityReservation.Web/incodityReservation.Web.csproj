@@ -8,4 +8,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0"></PackageReference>
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\incodityReservation.Infrastructure\incodityReservation.Infrastructure.csproj" />
+	</ItemGroup>
 </Project>

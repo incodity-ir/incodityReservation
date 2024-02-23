@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using incodityReservation.Infrastructure;
+using incodityReservation.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using incodityReservation.Web.Models;
 
@@ -7,10 +9,11 @@ namespace incodityReservation.Web.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    private readonly IApplicationDb dbcontext;
+    public HomeController(ILogger<HomeController> logger, SqlServerApplicationDb dbcontext)
     {
         _logger = logger;
+        this.dbcontext = dbcontext;
     }
 
     public IActionResult Index()

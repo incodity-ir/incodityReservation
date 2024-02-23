@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace incodityReservation.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialAppTables : Migration
+    public partial class InitialTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -85,22 +85,22 @@ namespace incodityReservation.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Provinces",
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "IsDeleted", "Name", "UpdatedAt" },
-                values: new object[] { 1, new DateTime(2024, 2, 7, 0, 38, 26, 390, DateTimeKind.Local).AddTicks(5716), null, false, "اصفهان", null });
+                values: new object[] { 1, new DateTime(2024, 2, 16, 10, 57, 58, 439, DateTimeKind.Local).AddTicks(8781), null, false, "اصفهان", null });
 
             migrationBuilder.InsertData(
                 table: "Citys",
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "IsDeleted", "Name", "ProvinceId", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 2, 7, 0, 38, 26, 390, DateTimeKind.Local).AddTicks(4675), null, false, "چادگان", 1, null },
-                    { 2, new DateTime(2024, 2, 7, 0, 38, 26, 390, DateTimeKind.Local).AddTicks(4696), null, false, "باغ بهادران", 1, null },
-                    { 3, new DateTime(2024, 2, 7, 0, 38, 26, 390, DateTimeKind.Local).AddTicks(4698), null, false, "سمیرم", 1, null }
+                    { 1, new DateTime(2024, 2, 16, 10, 57, 58, 439, DateTimeKind.Local).AddTicks(6471), null, false, "چادگان", 1, null },
+                    { 2, new DateTime(2024, 2, 16, 10, 57, 58, 439, DateTimeKind.Local).AddTicks(6499), null, false, "باغ بهادران", 1, null },
+                    { 3, new DateTime(2024, 2, 16, 10, 57, 58, 439, DateTimeKind.Local).AddTicks(6501), null, false, "سمیرم", 1, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Villas",
                 columns: new[] { "Id", "Address", "CityId", "CreatedAt", "DeletedAt", "Description", "Image", "IsDeleted", "Name", "Price", "UpdatedAt" },
-                values: new object[] { 1, "داخل مجموعه دست چپ", 2, new DateTime(2024, 2, 7, 0, 38, 26, 390, DateTimeKind.Local).AddTicks(7131), null, null, null, false, "ویلای A", 1000.0, null });
+                values: new object[] { 1, "داخل مجموعه دست چپ", 2, new DateTime(2024, 2, 16, 10, 57, 58, 440, DateTimeKind.Local).AddTicks(568), null, null, null, false, "ویلای A", 1000.0, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Citys_ProvinceId",

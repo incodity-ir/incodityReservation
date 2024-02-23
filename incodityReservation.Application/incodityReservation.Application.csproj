@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\incodityReservation.Infrastructure\incodityReservation.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -9,13 +9,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace incodityReservation.Infrastructure.Persistence
 {
-    public class SqlServerApplicationDb:DbContext
+    public class SqlServerApplicationDb : DbContext, IApplicationDb
     {
+        public SqlServerApplicationDb(DbContextOptions<SqlServerApplicationDb> option):base(option)
+        {
+            
+        }
+
+        /* Comment
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=.;Database=incodityRSVdb;Integrated Security=True;TrustServerCertificate=True");
+            //optionsBuilder.UseSqlServer("Server=.;Database=incodityRSVdb;Integrated Security=True;TrustServerCertificate=True");
         }
+        */
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

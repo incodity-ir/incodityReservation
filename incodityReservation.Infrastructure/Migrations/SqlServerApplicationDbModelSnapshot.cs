@@ -59,7 +59,7 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 2, 7, 0, 38, 26, 390, DateTimeKind.Local).AddTicks(4675),
+                            CreatedAt = new DateTime(2024, 2, 16, 10, 57, 58, 439, DateTimeKind.Local).AddTicks(6471),
                             IsDeleted = false,
                             Name = "چادگان",
                             ProvinceId = 1
@@ -67,7 +67,7 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 2, 7, 0, 38, 26, 390, DateTimeKind.Local).AddTicks(4696),
+                            CreatedAt = new DateTime(2024, 2, 16, 10, 57, 58, 439, DateTimeKind.Local).AddTicks(6499),
                             IsDeleted = false,
                             Name = "باغ بهادران",
                             ProvinceId = 1
@@ -75,7 +75,7 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 2, 7, 0, 38, 26, 390, DateTimeKind.Local).AddTicks(4698),
+                            CreatedAt = new DateTime(2024, 2, 16, 10, 57, 58, 439, DateTimeKind.Local).AddTicks(6501),
                             IsDeleted = false,
                             Name = "سمیرم",
                             ProvinceId = 1
@@ -114,7 +114,7 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 2, 7, 0, 38, 26, 390, DateTimeKind.Local).AddTicks(5716),
+                            CreatedAt = new DateTime(2024, 2, 16, 10, 57, 58, 439, DateTimeKind.Local).AddTicks(8781),
                             IsDeleted = false,
                             Name = "اصفهان"
                         });
@@ -173,7 +173,7 @@ namespace incodityReservation.Infrastructure.Migrations
                             Id = 1,
                             Address = "داخل مجموعه دست چپ",
                             CityId = 2,
-                            CreatedAt = new DateTime(2024, 2, 7, 0, 38, 26, 390, DateTimeKind.Local).AddTicks(7131),
+                            CreatedAt = new DateTime(2024, 2, 16, 10, 57, 58, 440, DateTimeKind.Local).AddTicks(568),
                             IsDeleted = false,
                             Name = "ویلای A",
                             Price = 1000.0
