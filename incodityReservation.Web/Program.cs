@@ -1,3 +1,5 @@
+using incodityReservation.Application.Contracts;
+using incodityReservation.Application.Services;
 using incodityReservation.Infrastructure;
 using incodityReservation.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -12,15 +14,13 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<IApplicationDb, SqlServerApplicationDb>(option =>
 {
-    // Type 1
-    //option.UseSqlServer("Server=.;Database=incodityRSVdb;Integrated Security=True;TrustServerCertificate=True;");
-
-    // Type 2
     option.UseSqlServer(builder.Configuration.GetConnectionString("AppDb"));
-
-    // Type 3
-    //option.UseSqlServer(builder.Configuration["DatbaseConnections:Appdb"]);
 });
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();
+builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 
 #endregion
 

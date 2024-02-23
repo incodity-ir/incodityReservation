@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using incodityReservation.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using incodityReservation.Infrastructure.Persistence;
 namespace incodityReservation.Infrastructure.Migrations
 {
     [DbContext(typeof(SqlServerApplicationDb))]
-    partial class SqlServerApplicationDbModelSnapshot : ModelSnapshot
+    [Migration("20240223071056_addDescPropToCityTable")]
+    partial class addDescPropToCityTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

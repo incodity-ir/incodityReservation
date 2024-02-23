@@ -7,6 +7,8 @@ public class City:BaseEntity
         Villas = new List<Villa>();
     }
     public required string Name { get; set; }
+    public string? Description { get; set; } 
+    public string? ImageUrl { get; set; }
     public int ProvinceId { get; set; }
 
     //navigation properties

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<incodityReservation.Application.Dtos.CityForShowDto>
+
+
+<div dir="rtl" class="row">
+    @foreach (var item in Model)
+    {
+    
+        <div class="col-4">
+            <div class="card">
+                <img src="@item.ImageUrl" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    @* <p class="card-text" style="text-align:justify">@item.Description</p> *@
+                    <a href="#" class="btn btn-primary">@item.ProvinceName</a>
+                </div>
+            </div>
+        </div>
+      
+    }
+    
+</div>
+<a asp-action="Create" class="btn btn-primary">افزودن شهر</a>

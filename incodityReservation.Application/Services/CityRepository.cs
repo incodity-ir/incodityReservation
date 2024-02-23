@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using incodityReservation.Application.Contracts;
+using incodityReservation.Application.Dtos;
 using incodityReservation.Domain;
 using incodityReservation.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -15,15 +17,17 @@ namespace incodityReservation.Application.Services
         #region Fileds
 
         private readonly IApplicationDb dbContext;
+        private readonly IMapper mapper;
 
-        public CityRepository(IApplicationDb dbContext)
+        public CityRepository(IApplicationDb dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
+            this.mapper = mapper;
         }
 
         #endregion
 
-        public async Task<IEnumerable<City>> GetAll() => await dbContext.Set<City>().ToListAsync();
+        public async Task<IEnumerable<City>> GetAll() => await dbContext.Set<City>().Include(p=>p.Province).ToListAsync();
 
         public async Task<City> GetById(int id) => await dbContext.Set<City>().FirstOrDefaultAsync(p => p.Id == id);
 
@@ -81,5 +85,48 @@ namespace incodityReservation.Application.Services
 
         public IQueryable<City> Table => dbContext.Set<City>();
         public IQueryable<City> TableAsNoTracking => dbContext.Set<City>().AsNoTracking();
+        public async Task<bool> Create(CreateCityDto city)
+        {
+            try
+            {
+                // 1
+                City c = new()
+                {
+                    Name = city.Name,
+                    ProvinceId = city.ProvinceId
+                };
+                await dbContext.Set<City>().AddAsync(c);
+                await dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public Task<List<CityDto>> GetCitySummery()
+        {
+           return TableAsNoTracking.Select(p => new CityDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                ImageUrl = p.ImageUrl
+            }).ToListAsync();
+        }
+
+        public async Task<List<CityForShowDto>> GetAllCities()
+        {
+            /*return await dbContext.Set<City>().Include(p => p.Province).Select(p => new CityForShowDto
+            {
+                Id = p.Id,
+                ImageUrl = p.ImageUrl,
+                Name = p.Name,
+                ProvinceName = p.Province.Name
+            }).ToListAsync();
+            */
+            var list = await TableAsNoTracking.ToListAsync();
+            return mapper.Map<List<CityForShowDto>>(list);
+        }
     }
 }

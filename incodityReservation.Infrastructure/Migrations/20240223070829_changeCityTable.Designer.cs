@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using incodityReservation.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using incodityReservation.Infrastructure.Persistence;
 namespace incodityReservation.Infrastructure.Migrations
 {
     [DbContext(typeof(SqlServerApplicationDb))]
-    partial class SqlServerApplicationDbModelSnapshot : ModelSnapshot
+    [Migration("20240223070829_changeCityTable")]
+    partial class changeCityTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,9 +38,6 @@ namespace incodityReservation.Infrastructure.Migrations
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -65,7 +65,7 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 2, 23, 10, 40, 55, 990, DateTimeKind.Local).AddTicks(4400),
+                            CreatedAt = new DateTime(2024, 2, 23, 10, 38, 28, 152, DateTimeKind.Local).AddTicks(5468),
                             IsDeleted = false,
                             Name = "چادگان",
                             ProvinceId = 1
@@ -73,7 +73,7 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 2, 23, 10, 40, 55, 990, DateTimeKind.Local).AddTicks(4419),
+                            CreatedAt = new DateTime(2024, 2, 23, 10, 38, 28, 152, DateTimeKind.Local).AddTicks(5485),
                             IsDeleted = false,
                             Name = "باغ بهادران",
                             ProvinceId = 1
@@ -81,7 +81,7 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 2, 23, 10, 40, 55, 990, DateTimeKind.Local).AddTicks(4421),
+                            CreatedAt = new DateTime(2024, 2, 23, 10, 38, 28, 152, DateTimeKind.Local).AddTicks(5487),
                             IsDeleted = false,
                             Name = "سمیرم",
                             ProvinceId = 1
@@ -120,7 +120,7 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 2, 23, 10, 40, 55, 990, DateTimeKind.Local).AddTicks(5535),
+                            CreatedAt = new DateTime(2024, 2, 23, 10, 38, 28, 152, DateTimeKind.Local).AddTicks(6632),
                             IsDeleted = false,
                             Name = "اصفهان"
                         });
@@ -179,7 +179,7 @@ namespace incodityReservation.Infrastructure.Migrations
                             Id = 1,
                             Address = "داخل مجموعه دست چپ",
                             CityId = 2,
-                            CreatedAt = new DateTime(2024, 2, 23, 10, 40, 55, 990, DateTimeKind.Local).AddTicks(7027),
+                            CreatedAt = new DateTime(2024, 2, 23, 10, 38, 28, 152, DateTimeKind.Local).AddTicks(8041),
                             IsDeleted = false,
                             Name = "ویلای A",
                             Price = 1000.0
