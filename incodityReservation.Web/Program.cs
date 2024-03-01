@@ -1,7 +1,9 @@
 using incodityReservation.Application.Contracts;
+using incodityReservation.Application.Mapping;
 using incodityReservation.Application.Services;
 using incodityReservation.Infrastructure;
 using incodityReservation.Infrastructure.Persistence;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,11 +18,14 @@ builder.Services.AddDbContext<IApplicationDb, SqlServerApplicationDb>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("AppDb"));
 });
+var mapper = ConfigMapping.ConfigMap().CreateMapper();
+builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
+builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
 #endregion
 

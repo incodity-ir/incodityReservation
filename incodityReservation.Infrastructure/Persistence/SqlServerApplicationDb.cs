@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using incodityReservation.Domain;
+using incodityReservation.Domain.Entities;
 using incodityReservation.Infrastructure.EntitiesConfig;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,5 +45,6 @@ namespace incodityReservation.Infrastructure.Persistence
         public DbSet<Villa> Villas { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<City> Citys { get; set; }
+        public DbSet<ImageLibrary> ImageLibraries { get; set; }
     }
 }

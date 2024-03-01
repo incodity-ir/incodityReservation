@@ -1,0 +1,59 @@
+﻿@using incodityReservation.Application.Dtos
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model incodityReservation.Application.Dtos.AddVillaDto
+
+@{
+    ViewData["Title"] = "افزودن ویلای جدید";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title fw-semibold mb-4">افزودن ویلای جدید</h5>
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Villa" asp-action="Create">
+                <div class="row">
+                    <div class="mb-3 col-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label asp-for="CityId" class="form-label"></label>
+                        @* <input asp-for="CityId" type="text" class="form-control"> *@
+                        @Html.DropDownListFor(m => m.CityId, ViewData["Cities"] as SelectList, "انتخاب شهر", new { @class = "form-control" })
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label asp-for="Description" class="form-label"></label>
+                        <input asp-for="Description" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label asp-for="Price" class="form-label"></label>
+                        <input asp-for="Price" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-3">
+                        <label asp-for="ImageBytes" class="form-label"></label>
+                        <input asp-for="ImageBytes" type="file" class="form-control">
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label asp-for="Address" class="form-label"></label>
+                        <input asp-for="Address" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label asp-for="StartDate" class="form-label"></label>
+                        <input asp-for="StartDate" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label asp-for="ExpireDate" class="form-label"></label>
+                        <input asp-for="ExpireDate" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">ذخیره</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

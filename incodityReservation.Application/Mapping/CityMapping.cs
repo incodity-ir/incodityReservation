@@ -15,7 +15,6 @@ namespace incodityReservation.Application.Mapping
         {
             CreateMap<City, CityForShowDto>()
                 .ForMember(p => p.Id, p => p.MapFrom(p => p.Id))
-
                 .ForMember(p => p.Name, p => p.MapFrom(p => p.Name))
                 .ForMember(p => p.ImageUrl, p => p.MapFrom(p => p.ImageUrl))
                 .ForMember(p => p.ProvinceName, p => p.MapFrom(p => p.Province.Name)).ReverseMap();

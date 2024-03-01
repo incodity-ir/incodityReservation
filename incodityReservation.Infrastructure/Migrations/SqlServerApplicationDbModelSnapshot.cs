@@ -65,7 +65,7 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 2, 23, 10, 40, 55, 990, DateTimeKind.Local).AddTicks(4400),
+                            CreatedAt = new DateTime(2024, 3, 1, 9, 51, 5, 669, DateTimeKind.Local).AddTicks(7024),
                             IsDeleted = false,
                             Name = "چادگان",
                             ProvinceId = 1
@@ -73,7 +73,7 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 2, 23, 10, 40, 55, 990, DateTimeKind.Local).AddTicks(4419),
+                            CreatedAt = new DateTime(2024, 3, 1, 9, 51, 5, 669, DateTimeKind.Local).AddTicks(7041),
                             IsDeleted = false,
                             Name = "باغ بهادران",
                             ProvinceId = 1
@@ -81,11 +81,45 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 2, 23, 10, 40, 55, 990, DateTimeKind.Local).AddTicks(4421),
+                            CreatedAt = new DateTime(2024, 3, 1, 9, 51, 5, 669, DateTimeKind.Local).AddTicks(7043),
                             IsDeleted = false,
                             Name = "سمیرم",
                             ProvinceId = 1
                         });
+                });
+
+            modelBuilder.Entity("incodityReservation.Domain.Entities.ImageLibrary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VillaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VillaId");
+
+                    b.ToTable("ImageLibraries");
                 });
 
             modelBuilder.Entity("incodityReservation.Domain.Province", b =>
@@ -120,7 +154,7 @@ namespace incodityReservation.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 2, 23, 10, 40, 55, 990, DateTimeKind.Local).AddTicks(5535),
+                            CreatedAt = new DateTime(2024, 3, 1, 9, 51, 5, 670, DateTimeKind.Local).AddTicks(1284),
                             IsDeleted = false,
                             Name = "اصفهان"
                         });
@@ -150,8 +184,11 @@ namespace incodityReservation.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("ImageBytes")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -163,6 +200,9 @@ namespace incodityReservation.Infrastructure.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -179,10 +219,12 @@ namespace incodityReservation.Infrastructure.Migrations
                             Id = 1,
                             Address = "داخل مجموعه دست چپ",
                             CityId = 2,
-                            CreatedAt = new DateTime(2024, 2, 23, 10, 40, 55, 990, DateTimeKind.Local).AddTicks(7027),
+                            CreatedAt = new DateTime(2024, 3, 1, 9, 51, 5, 670, DateTimeKind.Local).AddTicks(2647),
+                            ExpireDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "ویلای A",
-                            Price = 1000.0
+                            Price = 1000.0,
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -195,6 +237,17 @@ namespace incodityReservation.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Province");
+                });
+
+            modelBuilder.Entity("incodityReservation.Domain.Entities.ImageLibrary", b =>
+                {
+                    b.HasOne("incodityReservation.Domain.Villa", "Villa")
+                        .WithMany("ImageLibraries")
+                        .HasForeignKey("VillaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Villa");
                 });
 
             modelBuilder.Entity("incodityReservation.Domain.Villa", b =>
@@ -216,6 +269,11 @@ namespace incodityReservation.Infrastructure.Migrations
             modelBuilder.Entity("incodityReservation.Domain.Province", b =>
                 {
                     b.Navigation("cities");
+                });
+
+            modelBuilder.Entity("incodityReservation.Domain.Villa", b =>
+                {
+                    b.Navigation("ImageLibraries");
                 });
 #pragma warning restore 612, 618
         }
