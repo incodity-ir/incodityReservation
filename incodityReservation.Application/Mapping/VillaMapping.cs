@@ -35,7 +35,6 @@ namespace incodityReservation.Application.Mapping
                 .ForMember(m => m.Name, m => m.MapFrom(m => m.Name))
                 .ForMember(m => m.Description, m => m.MapFrom(m => m.Description))
                 .ForMember(m => m.Price, m => m.MapFrom(m => m.Price))
-                .ForMember(m => m.ImageBytes, m => m.MapFrom(m => m.ImageBytes.ConvertImageToByte()))
                 .ForMember(m => m.Address, m => m.MapFrom(m => m.Address))
                 .ForMember(m => m.StartDate, m => m.MapFrom(m => m.StartDate.PersianToMiladi()))
                 .ForMember(m => m.ExpireDate, m => m.MapFrom(m => m.ExpireDate.PersianToMiladi()));

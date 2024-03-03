@@ -14,9 +14,9 @@ namespace incodityReservation.Infrastructure.EntitiesConfig
         public void Configure(EntityTypeBuilder<City> builder)
         {
             
-            builder.HasData(SeedCities);
+            //builder.HasData(SeedCities);
         }
-
+        /*
         // Seed Data
         public IEnumerable<City> SeedCities => new List<City>
         {
@@ -44,5 +44,6 @@ namespace incodityReservation.Infrastructure.EntitiesConfig
 
 
         };
+        */
     }
 }

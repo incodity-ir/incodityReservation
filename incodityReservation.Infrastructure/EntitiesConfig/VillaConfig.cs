@@ -16,6 +16,7 @@ namespace incodityReservation.Infrastructure.EntitiesConfig
         {
             // other api
             builder.Property(p => p.Name).IsRequired().HasMaxLength(150);
+            /*
             builder.HasData(new Villa
             {
                 Id=1,
@@ -25,7 +26,7 @@ namespace incodityReservation.Infrastructure.EntitiesConfig
                 CityId = 2,
                 CreatedAt = DateTime.Now
             });
-
+            */
         }
     }
 }

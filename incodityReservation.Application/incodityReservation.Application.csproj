@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Cities\Commands\" />
-    <Folder Include="Features\Villas\Queries\" />
   </ItemGroup>
 
 </Project>

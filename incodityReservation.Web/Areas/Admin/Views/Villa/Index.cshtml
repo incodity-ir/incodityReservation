@@ -1,5 +1,45 @@
-﻿@model incodityReservation.Application.Dtos.AddVillaDto
+﻿@model IEnumerable<incodityReservation.Application.Dtos.VillaTable>
 
 @{
-    ViewData["Title"] = "افزودن ویلای جدید";
+    ViewData["Title"] = "لیست ویلا ها";
 }
+
+<div>
+    <a href="@Url.Action("Create","Villa")" class="btn btn-primary m-1">افزودن ویلای جدید</a>
+</div>
+
+<table class="table table-bordered table-hover table table-striped align-middle table-responsive" width="100%">
+    <thead>
+    <tr>
+        <th></th>
+        <th>نام ویلا</th>
+            <th>نام شهر</th>
+        <th>اجاره بها</th>
+        <th>تصویر</th>
+        <th>تاریخ شروع</th>
+        <th>تاریخ پایان</th>
+        <th>بروز رسانی</th>
+            <th>حذف</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.CityName</td>
+            <td>@item.Price</td>
+            <td><img width="150" src="data:image/jpeg;base64,@Convert.ToBase64String(item.ImageBytes)" alt="تصویر ویلا" /></td>
+            <td>@item.StartDate</td>
+            <td>@item.ExpireDate</td>
+            <td>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+            </td>
+            <td>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-http-delete" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 8v8h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-2z" /><path d="M14 8h-4v8h4" /><path d="M10 12h2.5" /><path d="M17 8v8h4" /></svg>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

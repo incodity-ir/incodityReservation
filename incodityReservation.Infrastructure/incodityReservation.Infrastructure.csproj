@@ -16,4 +16,13 @@
     <ProjectReference Include="..\incodityReservation.Domain\incodityReservation.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+      <HintPath>C:\Program Files (x86)\dotnet\packs\Microsoft.AspNetCore.App.Ref\8.0.1\ref\net8.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features">
+      <HintPath>C:\Program Files (x86)\dotnet\packs\Microsoft.AspNetCore.App.Ref\8.0.1\ref\net8.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

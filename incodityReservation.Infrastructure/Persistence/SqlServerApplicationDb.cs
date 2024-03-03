@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 using incodityReservation.Domain;
 using incodityReservation.Domain.Entities;
 using incodityReservation.Infrastructure.EntitiesConfig;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace incodityReservation.Infrastructure.Persistence
 {
     public class SqlServerApplicationDb : DbContext, IApplicationDb
     {
-        public SqlServerApplicationDb(DbContextOptions<SqlServerApplicationDb> option):base(option)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public SqlServerApplicationDb(DbContextOptions<SqlServerApplicationDb> option, IHttpContextAccessor contextAccessor):base(option)
         {
-            
+            _contextAccessor = contextAccessor;
         }
 
         /* Comment
@@ -38,7 +40,7 @@ namespace incodityReservation.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new ProvinceConfig());
             modelBuilder.ApplyConfiguration(new VillaConfig());
             */
-
+            modelBuilder.OnCreatedAt();
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CityConfig).Assembly);
         }
 
@@ -46,5 +48,30 @@ namespace incodityReservation.Infrastructure.Persistence
         public DbSet<Province> Provinces { get; set; }
         public DbSet<City> Citys { get; set; }
         public DbSet<ImageLibrary> ImageLibraries { get; set; }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            if (ChangeTracker.HasChanges())
+            {
+                foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+                {
+                    switch (entry.State)
+                    {
+                        case EntityState.Added:
+                            entry.Entity.CreateByIpAddress = Extensions.GetUserIPAddress(_contextAccessor.HttpContext);
+                            entry.Entity.CreatedByBrowser = Extensions.GetUserBrowserName(_contextAccessor.HttpContext);
+                            break;
+                        case EntityState.Modified:
+                            entry.Entity.UpdatedAt = DateTime.Now;
+                            break;
+                        case EntityState.Deleted:
+                            entry.Entity.DeletedAt = DateTime.Now;
+                            entry.Entity.IsDeleted = true;
+                            break;
+                    }
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
+        }
     }
 }

@@ -13,12 +13,14 @@ namespace incodityReservation.Infrastructure.EntitiesConfig
     {
         public void Configure(EntityTypeBuilder<Province> builder)
         {
+            /*
             builder.HasData(new Province
             {
                 Id=1,
                 Name = "اصفهان",
                 CreatedAt = DateTime.Now,
             });
+            */
         }
     }
 }

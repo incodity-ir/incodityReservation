@@ -5,6 +5,7 @@ using incodityReservation.Infrastructure;
 using incodityReservation.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddControllersWithViews();
 #region IoC : Inversion of Controller
 
 
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDbContext<IApplicationDb, SqlServerApplicationDb>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("AppDb"));

@@ -7,4 +7,6 @@ public class BaseEntity : Entity, IDateEntity
     public DateTime? UpdatedAt { get; set; } // optional , can be null
     public DateTime? DeletedAt { get; set; }
     public bool IsDeleted { get; set; } = false;
+    public string CreatedByBrowser { get; set; }
+    public string CreateByIpAddress { get; set; }
 }

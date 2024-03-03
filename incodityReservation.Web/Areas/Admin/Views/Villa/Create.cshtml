@@ -11,14 +11,14 @@
         <h5 class="card-title fw-semibold mb-4">افزودن ویلای جدید</h5>
         <div class="card">
             <div class="card-body">
-                <form asp-controller="Villa" asp-action="Create">
+                <form asp-controller="Villa" asp-action="Create" enctype="multipart/form-data" >
                 <div class="row">
                     <div class="mb-3 col-3">
                         <label asp-for="Name" class="form-label"></label>
                         <input asp-for="Name" type="text" class="form-control">
                     </div>
                     <div class="mb-3 col-3">
-                        <label asp-for="CityId" class="form-label"></label>
+                        <label asp-for="CityId" class="form-label">نام شهر</label>
                         @* <input asp-for="CityId" type="text" class="form-control"> *@
                         @Html.DropDownListFor(m => m.CityId, ViewData["Cities"] as SelectList, "انتخاب شهر", new { @class = "form-control" })
                     </div>

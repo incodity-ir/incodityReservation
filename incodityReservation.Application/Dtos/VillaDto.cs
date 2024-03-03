@@ -94,4 +94,22 @@ namespace incodityReservation.Application.Dtos
         [Display(Name = "تاریخ پایان")]
         public string ExpireDate { get; set; }
     }
+
+    public class VillaTable
+    {
+        [Display(Name = "شناسه")]
+        public int Id { get; set; }
+        [Display(Name = "نام شهر")]
+        public string CityName { get; set; }
+        [Display(Name = "نام ویلا")]
+        public string Name { get; set; }
+        [Display(Name = "اجاره بها")]
+        public double Price { get; set; }
+        [Display(Name = "تصویر ویلا")]
+        public byte[]? ImageBytes { get; set; }
+        [Display(Name = "تاریخ شروع")]
+        public string StartDate { get; set; }
+        [Display(Name = "تاریخ پایان")]
+        public string ExpireDate { get; set; }
+    }
 }
