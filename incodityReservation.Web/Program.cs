@@ -1,8 +1,11 @@
+using Enyim.Caching.Configuration;
 using incodityReservation.Application.Contracts;
 using incodityReservation.Application.Mapping;
 using incodityReservation.Application.Services;
 using incodityReservation.Infrastructure;
 using incodityReservation.Infrastructure.Persistence;
+using incodityReservation.Web.CachedFramework;
+using incodityReservation.Web.CachingFramework;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -28,6 +31,32 @@ builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
+#region Use InMemory Cahced
+
+//builder.Services.AddMemoryCache();
+
+#endregion
+
+#region Use Memcached
+/*
+builder.Services.AddEnyimMemcached(c =>
+    c.Servers = new List<Server> { new Server { Address = "localhost", Port = 11211 } });
+builder.Services.TryAddSingleton<ICacheProvider, CacheProvider>();
+builder.Services.TryAddSingleton<ICacheRepository, CacheRepository>();
+*/
+#endregion
+
+#region Use Redis for cached 
+
+builder.Services.AddDistributedRedisCache(option =>
+{
+    option.Configuration = "127.0.0.1:6379";
+    option.InstanceName = "incodity";
+});
+
+#endregion
+
 
 #endregion
 

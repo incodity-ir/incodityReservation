@@ -8,6 +8,7 @@ using incodityReservation.Domain.Entities;
 using incodityReservation.Infrastructure.EntitiesConfig;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace incodityReservation.Infrastructure.Persistence
 {
@@ -67,11 +68,13 @@ namespace incodityReservation.Infrastructure.Persistence
                         case EntityState.Deleted:
                             entry.Entity.DeletedAt = DateTime.Now;
                             entry.Entity.IsDeleted = true;
+                            Remove(entry);
                             break;
                     }
                 }
             }
             return base.SaveChangesAsync(cancellationToken);
         }
+
     }
 }
