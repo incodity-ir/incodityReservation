@@ -3,6 +3,7 @@ using incodityReservation.Application.Contracts;
 using incodityReservation.Application.Mapping;
 using incodityReservation.Application.Services;
 using incodityReservation.Infrastructure;
+using incodityReservation.Infrastructure.Features;
 using incodityReservation.Infrastructure.Persistence;
 using incodityReservation.Web.CachedFramework;
 using incodityReservation.Web.CachingFramework;
@@ -19,10 +20,11 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddDbContext<IApplicationDb, SqlServerApplicationDb>(option =>
+builder.Services.AddSingleton<SoftDeleteInterceptor>();
+builder.Services.AddDbContextPool<IApplicationDb, SqlServerApplicationDb>((sp,option) =>
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString("AppDb"));
-});
+    option.UseSqlServer(builder.Configuration.GetConnectionString("AppDb")).AddInterceptors(sp.GetRequiredService<SoftDeleteInterceptor>());
+},poolSize:16);
 var mapper = ConfigMapping.ConfigMap().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

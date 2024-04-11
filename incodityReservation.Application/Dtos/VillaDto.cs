@@ -95,7 +95,7 @@ namespace incodityReservation.Application.Dtos
         public string ExpireDate { get; set; }
     }
 
-    public class VillaTable
+    public class VillaTableDto
     {
         [Display(Name = "شناسه")]
         public int Id { get; set; }

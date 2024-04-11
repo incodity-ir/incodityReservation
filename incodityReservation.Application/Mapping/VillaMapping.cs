@@ -10,7 +10,7 @@ using incodityReservation.Domain;
 
 namespace incodityReservation.Application.Mapping
 {
-    public class VillaMapping:Profile
+    public class VillaMapping : Profile
     {
         public VillaMapping()
         {
@@ -55,6 +55,15 @@ namespace incodityReservation.Application.Mapping
 
 
             CreateMap<Villa, VillaPageDto>()
+                .ForMember(m => m.Id, m => m.MapFrom(m => m.Id))
+                .ForMember(m => m.CityName, m => m.MapFrom(m => m.City.Name))
+                .ForMember(m => m.Name, m => m.MapFrom(m => m.Name))
+                .ForMember(m => m.Price, m => m.MapFrom(m => m.Price))
+                .ForMember(m => m.ImageBytes, m => m.MapFrom(m => m.ImageBytes))
+                .ForMember(m => m.StartDate, m => m.MapFrom(m => m.StartDate.ToPersian()))
+                .ForMember(m => m.ExpireDate, m => m.MapFrom(m => m.ExpireDate.ToPersian()));
+
+            CreateMap<Villa, VillaTableDto>()
                 .ForMember(m => m.Id, m => m.MapFrom(m => m.Id))
                 .ForMember(m => m.CityName, m => m.MapFrom(m => m.City.Name))
                 .ForMember(m => m.Name, m => m.MapFrom(m => m.Name))

@@ -32,7 +32,7 @@ namespace incodityReservation.Application.Features.Villas.Commands
             var obj = await _dbContext.Set<Villa>().FirstOrDefaultAsync(p => p.Id == request.Id);
             if (obj == null) throw new ArgumentNullException(nameof(obj));
             _dbContext.Set<Villa>().Remove(obj);
-            _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
 
             return Unit.Value;
         }

@@ -64,13 +64,13 @@ namespace incodityReservation.Web.Areas.Admin.Controllers
 
         private readonly ISender _mediatR;
         private readonly ILogger<VillaController> _logger;
-        private readonly IDistributedCache _cache;
+        //private readonly IDistributedCache _cache;
 
-        public VillaController(ISender mediatR, ILogger<VillaController> logger, IDistributedCache cache)
+        public VillaController(ISender mediatR, ILogger<VillaController> logger/*, IDistributedCache cache*/)
         {
             _mediatR = mediatR;
             _logger = logger;
-            _cache = cache;
+            //_cache = cache;
         }
 
         #endregion
@@ -78,7 +78,7 @@ namespace incodityReservation.Web.Areas.Admin.Controllers
 
 
         #endregion
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Name="",string City="",double From=0,double To=0,int currentPage=1)
         {
             #region Use Memcached
 
@@ -123,7 +123,7 @@ namespace incodityReservation.Web.Areas.Admin.Controllers
 
             #region Use Redis for cache
             
-
+            /*
             object result;
             string data = await _cache.GetStringAsync("getvillaList");
             if (string.IsNullOrEmpty(data))
@@ -141,9 +141,25 @@ namespace incodityReservation.Web.Areas.Admin.Controllers
             {
                 result = JsonConvert.DeserializeObject<List<VillaTable>>(data);
             }
-
+            */
             #endregion
 
+
+
+            //var query = new GetAllVillaQuery();
+            //query.Name = Name;
+            //query.City = City;
+            //query.From = from;
+            //query.To = to;
+
+            var query = new GetAllVillaModelQuery();
+            query.Name = Name;
+            query.City = City;
+            query.From = From;
+            query.To = To;
+            query.CurrentPage = currentPage;
+
+            var result = await _mediatR.Send(query);
             return View(result);
         }
 

@@ -52,28 +52,25 @@ namespace incodityReservation.Infrastructure.Persistence
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
+            
             if (ChangeTracker.HasChanges())
-            {
-                foreach (var entry in ChangeTracker.Entries<BaseEntity>())
                 {
-                    switch (entry.State)
+                    foreach (var entry in ChangeTracker.Entries<BaseEntity>())
                     {
-                        case EntityState.Added:
-                            entry.Entity.CreateByIpAddress = Extensions.GetUserIPAddress(_contextAccessor.HttpContext);
-                            entry.Entity.CreatedByBrowser = Extensions.GetUserBrowserName(_contextAccessor.HttpContext);
-                            break;
-                        case EntityState.Modified:
-                            entry.Entity.UpdatedAt = DateTime.Now;
-                            break;
-                        case EntityState.Deleted:
-                            entry.Entity.DeletedAt = DateTime.Now;
-                            entry.Entity.IsDeleted = true;
-                            Remove(entry);
-                            break;
+                        switch (entry.State)
+                        {
+                            case EntityState.Added:
+                                entry.Entity.CreateByIpAddress = Extensions.GetUserIPAddress(_contextAccessor.HttpContext);
+                                entry.Entity.CreatedByBrowser = Extensions.GetUserBrowserName(_contextAccessor.HttpContext);
+                                break;
+                            case EntityState.Modified:
+                                entry.Entity.UpdatedAt = DateTime.Now;
+                                break;
+                        }
                     }
                 }
-            }
-            return base.SaveChangesAsync(cancellationToken);
+                return base.SaveChangesAsync(cancellationToken);
+
         }
 
     }
