@@ -5,6 +5,7 @@ using incodityReservation.Application.Features.Villas.Queries;
 using incodityReservation.Web.CachedFramework;
 using incodityReservation.Web.CachingFramework;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Caching.Distributed;
@@ -15,6 +16,7 @@ namespace incodityReservation.Web.Areas.Admin.Controllers
 {
     [Route("[area]/[controller]/[action]")]
     [Area("Admin")]
+    
     public class VillaController : Controller
     {
         #region Fields
@@ -122,7 +124,7 @@ namespace incodityReservation.Web.Areas.Admin.Controllers
             #endregion
 
             #region Use Redis for cache
-            
+
             /*
             object result;
             string data = await _cache.GetStringAsync("getvillaList");
@@ -152,6 +154,7 @@ namespace incodityReservation.Web.Areas.Admin.Controllers
             //query.From = from;
             //query.To = to;
 
+
             var query = new GetAllVillaModelQuery();
             query.Name = Name;
             query.City = City;
@@ -165,6 +168,7 @@ namespace incodityReservation.Web.Areas.Admin.Controllers
 
         #region Create
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Create()
         {

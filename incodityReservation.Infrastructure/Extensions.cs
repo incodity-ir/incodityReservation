@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.Loader;
-using System.Text;
-using System.Threading.Tasks;
 using incodityReservation.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +9,7 @@ namespace incodityReservation.Infrastructure
 {
     public static class Extensions
     {
+
         public static void OnCreatedAt(this ModelBuilder modelBuilder)
         {
             var ListDateEntities = typeof(IDateEntity).GetAllClassName();

@@ -2,12 +2,15 @@ using Enyim.Caching.Configuration;
 using incodityReservation.Application.Contracts;
 using incodityReservation.Application.Mapping;
 using incodityReservation.Application.Services;
+using incodityReservation.Domain.Entities.Security;
 using incodityReservation.Infrastructure;
 using incodityReservation.Infrastructure.Features;
 using incodityReservation.Infrastructure.Persistence;
 using incodityReservation.Web.CachedFramework;
 using incodityReservation.Web.CachingFramework;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -33,6 +36,18 @@ builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IUserService,UserService>();
+
+#region Identity
+
+//builder.Services.AddDbContext<IdentityDbContext>(options =>
+//{
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("AppDb"), optionBuilder =>optionBuilder.MigrationsAssembly("incodityReservation.Infrastructure"));
+//});
+
+builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<SqlServerApplicationDb>().AddDefaultTokenProviders();
+
+#endregion
 
 #region Use InMemory Cahced
 
@@ -78,6 +93,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",

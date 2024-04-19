@@ -5,14 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using incodityReservation.Domain;
 using incodityReservation.Domain.Entities;
+using incodityReservation.Domain.Entities.Security;
 using incodityReservation.Infrastructure.EntitiesConfig;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace incodityReservation.Infrastructure.Persistence
 {
-    public class SqlServerApplicationDb : DbContext, IApplicationDb
+    public class SqlServerApplicationDb : IdentityDbContext<User,Role,long,UserClaim,UserRole,UserLogin,RoleClaim,UserToken>, IApplicationDb
     {
         private readonly IHttpContextAccessor _contextAccessor;
         public SqlServerApplicationDb(DbContextOptions<SqlServerApplicationDb> option, IHttpContextAccessor contextAccessor):base(option)
