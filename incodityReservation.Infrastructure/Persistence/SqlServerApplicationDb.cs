@@ -54,8 +54,9 @@ namespace incodityReservation.Infrastructure.Persistence
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            
-            if (ChangeTracker.HasChanges())
+            try
+            {
+                if (ChangeTracker.HasChanges())
                 {
                     foreach (var entry in ChangeTracker.Entries<BaseEntity>())
                     {
@@ -72,8 +73,27 @@ namespace incodityReservation.Infrastructure.Persistence
                     }
                 }
                 return base.SaveChangesAsync(cancellationToken);
-
+            }
+            catch (Exception ex)
+            {
+                CleanContext();
+                throw ex;
+            }
         }
 
+
+        void CleanContext()
+        {
+            if (ChangeTracker.HasChanges())
+            {
+                var _list = this.ChangeTracker.Entries().Where(p => p.State == EntityState.Deleted || p.State == EntityState.Added || p.State == EntityState.Modified).ToList();
+                foreach (var item in _list)
+                {
+                    _ = item.State == EntityState.Detached;
+                }
+            }
+        }
     }
+
+
 }

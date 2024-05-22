@@ -34,6 +34,7 @@ namespace incodityReservation.Application.Features.Villas.Queries
             _model.To = request.To;
 
             var query = _dbContext.Villas.Include(p=>p.City).Where(p => !p.IsDeleted).AsQueryable();
+            
             if (!string.IsNullOrEmpty(_model.Name))
             {
                 query = query.Where(p => p.Name.Contains(_model.Name));

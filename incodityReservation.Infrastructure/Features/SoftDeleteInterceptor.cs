@@ -1,6 +1,10 @@
-﻿using incodityReservation.Domain;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using incodityReservation.Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace incodityReservation.Infrastructure.Features
@@ -10,22 +14,19 @@ namespace incodityReservation.Infrastructure.Features
         public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result,
             CancellationToken cancellationToken = new CancellationToken())
         {
-            if (eventData.Context == null)
-            {
+            if(eventData.Context == null) 
                 return base.SavingChangesAsync(eventData, result, cancellationToken);
-            }
 
-            IEnumerable<EntityEntry<ISoftDelete>> entities = eventData.Context.ChangeTracker.Entries<ISoftDelete>()
-                .Where(e => e.State == EntityState.Deleted);
-            foreach (var item in entities)
+            var _list = eventData.Context.ChangeTracker.Entries<ISoftDelete>()
+                .Where(p => p.State == EntityState.Deleted);
+            foreach (var item in _list)
             {
                 item.State = EntityState.Modified;
+                item.Entity.DeletedAt = DateTime.Now;
                 item.Entity.IsDeleted = true;
-                item.Entity.DeletedAt = DateTime.UtcNow;
             }
 
             return base.SavingChangesAsync(eventData, result, cancellationToken);
-
         }
     }
 }
